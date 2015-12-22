@@ -1,0 +1,47 @@
+#your-files {
+  /*display: inline-block;*/
+  height:100px;
+  width:200px;
+  border: 1px solid black;
+}
+.container {
+  position: relative;
+  height: 500px;
+  border: 1px dashed #333;
+  width: 600px;
+}
+.center {
+    margin: auto;
+}
+.x-container {
+  position: relative;
+  height: 40px;
+  width: 600px;
+}
+#graph-wrapper {
+  position: absolute;
+  bottom: 0;
+}
+.bar {
+  position: absolute;
+  bottom: 0;
+  height: 100px;
+  margin-right: 30px;
+  width: 30px;
+  background: #444;
+  border: 1px solid black;
+}
+.bar p {
+  margin: 0;
+  margin-top: -20px;
+  padding: 0;
+}
+#x-axis {
+  margin: auto;
+  margin-left: -40px;
+  padding-left: 0;
+  list-style: none;
+}
+#x-axis li {
+  display: inline-block;
+}
