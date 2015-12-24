@@ -44,6 +44,44 @@
 .populationBar:hover {
   fill: #5800b3;
 }
+.populationBar2011 {
+  fill: #0099ff;
+}
+.populationBar2011:hover {
+  fill: #006bb3;
+}
+.populationBar2012 {
+  fill: #4db8ff;
+}
+.populationBar2012:hover {
+  fill: #006bb3;
+}
+.populationBar2013 {
+  fill: #80ccff;
+}
+.populationBar2013:hover {
+  fill: #006bb3;
+}
+
+.pPBar2011 {
+  fill: #ffcc00;
+}
+.pPBar2012 {
+  fill: #ffdb4d;
+}
+.pPBar2013 {
+  fill: #ffe680;
+}
+.pPBar2011:hover {
+  fill: #e6b900;
+}
+.pPBar2012:hover {
+  fill: #e6b900;
+}
+.pPBar2013:hover {
+  fill: #e6b900;
+}
+
 svg .legend-text {
   font-size: 12px;
 
