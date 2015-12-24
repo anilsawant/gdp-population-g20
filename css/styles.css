@@ -1,47 +1,93 @@
-#your-files {
-  /*display: inline-block;*/
-  height:100px;
-  width:200px;
-  border: 1px solid black;
+.wrapper {
+  background: #f2f2f2;
+  margin: auto;
+  text-align: center;
+  width: 1200px;
 }
-.container {
-  position: relative;
-  height: 500px;
-  border: 1px dashed #333;
-  width: 600px;
+
+.wrapper {
+  padding-top: 20px;
+
 }
-.center {
-    margin: auto;
+.wrapper h2 {
+  padding-bottom: 4px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  box-shadow: 0 0 2px #999;
 }
-.x-container {
-  position: relative;
-  height: 40px;
-  width: 600px;
-}
-#graph-wrapper {
-  position: absolute;
-  bottom: 0;
+.divider {
+  margin-top: 30px;
+  border-top: 1px solid #bbb;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
 }
 .bar {
+  fill: #3399ff;
+}
+
+.bar:hover {
+  fill: #0065cc;
+  cursor: pointer;
+}
+
+#graphWrap3 .bar {
+  fill: #0065cc;
+}
+#graphWrap3 .bar:hover {
+  fill: #3399ff;
+}
+.populationBar {
+  fill: #a54dff;
+}
+.populationBar:hover {
+  fill: #5800b3;
+}
+svg .legend-text {
+  font-size: 12px;
+
+}
+.axis{
+  font: 12px sans-serif;
+}
+.axis> text{
+  font: 14px sans-serif;
+  font-weight: bold;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
   position: absolute;
-  bottom: 0;
-  height: 100px;
-  margin-right: 30px;
-  width: 30px;
-  background: #444;
-  border: 1px solid black;
+  text-align: center;
 }
-.bar p {
-  margin: 0;
-  margin-top: -20px;
-  padding: 0;
-}
-#x-axis {
-  margin: auto;
-  margin-left: -40px;
-  padding-left: 0;
-  list-style: none;
-}
-#x-axis li {
-  display: inline-block;
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
 }

@@ -10,7 +10,128 @@ createContinentsJSON();
 createCountriesAndContinentJSON();
 
 // function call to create the JSON String representation of the data
-createJSONFromFile( '../data/raw_data_1.csv');  // accepts the raw content,new-line character, delimiter, and whether data is by default surrounded by quotes("")
+createJSONFromFile( '../data/raw_data_3.csv' );  // accepts the raw content's file path
+
+
+//Function to create JSON for Graph 1
+function createJSONForGraph11( processedData ) {
+  var graphDataArray = [];
+  var noOfRows = processedData.length;
+
+  for (var i = 0; i < noOfRows; i++) {
+    graphDataArray[i] = {
+      countryName : processedData[i][0],
+      population2013 : processedData[i][5]
+    };
+  }
+
+  var fileName = "graph11";
+  writeJSONToDisk( fileName, JSON.stringify( graphDataArray ) );// Write to disk
+
+} // End createJSONForGraph11()
+
+// Function to create JSON for Graph 2
+function createJSONForGraph12( processedData ) {
+  var graphDataArray = [];
+  var noOfRows = processedData.length;
+
+  for (var i = 0; i < noOfRows; i++) {
+    graphDataArray[i] = {
+      countryName : processedData[i][0],
+      gdp2013 : processedData[i][9]
+    };
+  }
+
+  var fileName = "graph12";
+  writeJSONToDisk( fileName, JSON.stringify( graphDataArray ) );// Write to disk
+
+} // End createJSONForGraph12()
+
+// Function to create JSON for Graph 2
+function createJSONForGraph13( processedData ) {
+  var graphDataArray = [];
+  var noOfRows = processedData.length;
+
+  for (var i = 0; i < noOfRows; i++) {
+    graphDataArray[i] = {
+      countryName : processedData[i][0],
+      pp2013 : processedData[i][17]
+    };
+  }
+
+  var fileName = "graph13";
+  writeJSONToDisk( fileName, JSON.stringify( graphDataArray ) );// Write to disk
+
+} // End createJSONForGraph13()
+
+// Function to create JSON for Graph 1,2,3
+function createJSONForGraph123( processedData ) {
+  var graphDataArray = [];
+  var noOfRows = processedData.length;
+
+  for (var i = 0; i < noOfRows; i++) {
+    graphDataArray[i] = {
+      countryName : processedData[i][0],
+      population2013 : processedData[i][5],
+      gdp2013 : processedData[i][9],
+      pp2013 : processedData[i][17]
+    };
+  }
+
+  var fileName = "graph123";
+  writeJSONToDisk( fileName, JSON.stringify( graphDataArray ) );// Write to disk
+
+} // End createJSONForGraph123()
+
+// Function to create JSON for Graph 2, Growth in Population and Purchasing Power from 2010 to 2013
+function createJSONForGraph2( processedData ) {
+  var graphDataArray = [];
+  var noOfRows = processedData.length;
+
+  for (var i = 0; i < noOfRows; i++) {
+    graphDataArray[i] = {
+      countryName : processedData[i][0],
+      population2010 : processedData[i][2],
+      population2011 : processedData[i][3],
+      population2012 : processedData[i][4],
+      population2013 : processedData[i][5],
+      pp2010 : processedData[i][14],
+      pp2011 : processedData[i][15],
+      pp2012 : processedData[i][16],
+      pp2013 : processedData[i][17]
+    };
+  }
+
+  var fileName = "pop_pp_growth_graph";
+  writeJSONToDisk( fileName, JSON.stringify( graphDataArray ) );// Write to disk
+
+} // End createJSONForGraph2()
+
+// Function to create JSON for Graph 3, Population and GDP by continents
+function createJSONForGraph3( processedData ) {
+  var graphDataArray = [];
+  var noOfRows = processedData.length;
+
+  for (var i = 0; i < noOfRows; i++) {
+    graphDataArray[i] = {
+      countryName : processedData[i][0],
+      population2010 : processedData[i][2],
+      population2011 : processedData[i][3],
+      population2012 : processedData[i][4],
+      population2013 : processedData[i][5],
+      gdp2010 : processedData[i][6],
+      gdp2011 : processedData[i][7],
+      gdp2012 : processedData[i][8],
+      gdp2013 : processedData[i][9]
+    };
+  }
+
+  var fileName = "continent_wise_graph";
+  writeJSONToDisk( fileName, JSON.stringify( graphDataArray ) );// Write to disk
+
+} // End createJSONForGraph3()
+
+
 
 // function to create a JSON String
 function createJSONFromFile( file ) {
@@ -22,17 +143,12 @@ function createJSONFromFile( file ) {
   rawData = rawData.toString();
 
   // Various parameters for createJSONFromFile() function
-  var newLineCharacter = "\n";
-  if( rawData.indexOf("\r\n") != -1 )
-    newLineCharacter = "\r\n";
+  var newLineCharacter = /\r\n|\n/;
   var delim = ",";
   var isDataQuoted = false;
-  if( rawData.indexOf("\"") != -1 )
-    isDataQuoted = true;
-
   var lines = rawData.split( newLineCharacter );
   var noOfLines = lines.length;
-  var noOfCols = ( lines[0].split( delim ) ).length;
+  var noOfCols = ( lines[0].split( delim) ).length;
   var noOfRows = 0;
   var processedData = [];
   for( var i = 0; i < noOfLines; i++ ) {
@@ -49,30 +165,38 @@ function createJSONFromFile( file ) {
     headers[i] = processedData[0][i];
   }
 
-  var jSONString = "[";
-  if( isDataQuoted ) {
-    for( var a = 1; a < noOfRows; a++) {
-      jSONString += "{";
-      for (var b = 0; b < noOfCols; b++) {
-        jSONString += headers[b]  + ":" + processedData[a][b] + ",";
-      }
-      jSONString += "},";
-      jSONString = jSONString.replace(",},","},");
-    }
-  } else {
-    for( var a = 1; a < noOfRows; a++) {
-      jSONString += "{";
-      for (var b = 0; b < noOfCols; b++) {
-        jSONString += "\"" + headers[b] + "\":\"" + processedData[a][b] + "\"" + ",";
-      }
-      jSONString += "},";
-      jSONString = jSONString.replace(",},","},");
-    }
-  }
-  jSONString += "]";
-  jSONString = jSONString.replace("},]","}]");
+  // Create the graph specific JSONs
+  createJSONForGraph11( processedData );
+  createJSONForGraph12( processedData );
+  createJSONForGraph13( processedData );
+  createJSONForGraph123( processedData );
+  createJSONForGraph2( processedData );
+  createJSONForGraph3( processedData );
 
-  writeJSONToDisk( fileName, jSONString );// Write to disk
+  var countryDetailsJSON = [];
+
+  // To treat headers as Keys
+  for( var i = 1; i < noOfRows; i++) {
+    var country = {};
+    for (var j = 0; j < noOfCols; j++) {
+      country[ headers[j] ] = processedData[i][j];
+    }
+    countryDetailsJSON.push( country );
+  }
+
+  // To add name and value properties
+  /*for( var i = 1; i < noOfRows; i++) {
+    var country = [];
+    for (var j = 0; j < noOfCols; j++) {
+      country[j] = {
+        name : headers[j],
+        value : processedData[i][j]
+      }
+    }
+    countryDetailsJSON.push( country );
+  }*/
+
+  writeJSONToDisk( fileName, JSON.stringify( countryDetailsJSON ) );// Write to disk
 
 } // End createJSONFromFile
 
@@ -82,7 +206,6 @@ function createJSONDirectory() {
   // Check if 'jsons' directory exists
   var dirStats = fs.statSync('../data/jsons');
   if ( dirStats.isDirectory() ) {
-    // console.log("Directory already exists!");
     return true;
   } else {
     // Creating the directory to store JSON files
@@ -90,7 +213,6 @@ function createJSONDirectory() {
       if( err ) {
         return console.error( err );;
       }
-      // console.log("Directory created successfully!");
       return true;
     });
   }
@@ -128,7 +250,8 @@ function createCountriesAndContinentJSON() {
      { country:"REPUBLIC OF KOREA", continent:continents[2] },
      { country:"TURKEY", continent:continents[2] },
      { country:"UNITED KINGDOM", continent:continents[4] },
-     { country:"USA", continent:continents[5] }
+     { country:"USA", continent:continents[5] },
+     { union:"EUROPEAN UNION", continent:continents[4] }
      ];
 
     writeJSONToDisk('countriesAndContinents', JSON.stringify( countriesAndContinents ) );
