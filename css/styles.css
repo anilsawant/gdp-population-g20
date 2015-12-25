@@ -38,6 +38,11 @@
 #graphWrap3 .bar:hover {
   fill: #3399ff;
 }
+#graphWrap4 svg {
+  padding-top: 20px;
+}
+
+
 .populationBar {
   fill: #a54dff;
 }

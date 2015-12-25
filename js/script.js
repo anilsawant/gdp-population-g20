@@ -548,7 +548,7 @@ d3.json("data/jsons/countriesAndContinents.json", function( countriesAndContinen
             .attr("x", function(d) { return x(d.countryName) + 4; })
             .attr("width", 16)
             .attr("y", function(d) { return yPop(parseFloat(d.popGrowth2011)); })
-            .attr("height", function(d) { return height - yPop(parseFloat(d.popGrowth2011)); })
+            .attr("height", function(d) { return height - yPop(parseFloat(d.popGrowth2011) > 0 ? parseFloat(d.popGrowth2011) : -parseFloat(d.popGrowth2011) ); })
             .on('mouseover', growthPop2011Tip.show)
             .on('mouseout', growthPop2011Tip.hide);
 
@@ -559,7 +559,9 @@ d3.json("data/jsons/countriesAndContinents.json", function( countriesAndContinen
             .attr("x", function(d) { return x(d.countryName) + 4; })
             .attr("width", 16)
             .attr("y", function(d) { return yPop(parseFloat(d.popGrowth2011) + parseFloat(d.popGrowth2012) );  })
-            .attr("height", function(d) { return height - yPop( parseFloat(d.popGrowth2012) ); })
+            .attr("height", function(d) {
+              return height - ( yPop( parseFloat(d.popGrowth2012) > 0 ? parseFloat(d.popGrowth2012) : -parseFloat(d.popGrowth2012)) );
+            })
             .on('mouseover', growthPop2012Tip.show)
             .on('mouseout', growthPop2012Tip.hide);
 
@@ -570,7 +572,7 @@ d3.json("data/jsons/countriesAndContinents.json", function( countriesAndContinen
             .attr("x", function(d) { return x(d.countryName) + 4; })
             .attr("width", 16)
             .attr("y", function(d) { return yPop(parseFloat(d.popGrowth2011) + parseFloat(d.popGrowth2012) + parseFloat(d.popGrowth2013) );  })
-            .attr("height", function(d) { return height - yPop(parseFloat(d.popGrowth2013)); })
+            .attr("height", function(d) { return height - yPop( parseFloat(d.popGrowth2013) > 0 ? parseFloat(d.popGrowth2013) : -parseFloat(d.popGrowth2013) ); })
             .on('mouseover', growthPop2013Tip.show)
             .on('mouseout', growthPop2013Tip.hide);
 
@@ -612,7 +614,7 @@ d3.json("data/jsons/countriesAndContinents.json", function( countriesAndContinen
             .attr("class","legend-text")
             .text("Population Growth")
             .attr("x", 10)
-            .attr("y", 0);
+            .attr("y", -10);
 
         populationLegend.append("rect")
             .attr("height",15)
@@ -650,40 +652,37 @@ d3.json("data/jsons/countriesAndContinents.json", function( countriesAndContinen
             .attr("x", 30)
             .attr("y", 78);
 
-
-
-
         var purPowerLegend = svg4.append("g")
                                 .attr("transform", "translate(680,0)");
 
         purPowerLegend.append("text")
             .attr("class","legend-text")
             .text("Purchasing Power Growth")
-            .attr("x", 50)
-            .attr("y", 0);
+            .attr("x", 43)
+            .attr("y", -10);
 
         purPowerLegend.append("rect")
             .attr("height",15)
             .attr("width",15)
             .attr("fill","#ffe680")
-            .attr("x", 100)
+            .attr("x", 155)
             .attr("y", 5);
         purPowerLegend.append("text")
             .attr("class","legend-text")
             .text("2012-2013")
-            .attr("x", 120)
+            .attr("x", 100)
             .attr("y", 18);
 
         purPowerLegend.append("rect")
             .attr("height",15)
             .attr("width",15)
             .attr("fill","#ffdb4d")
-            .attr("x", 100)
+            .attr("x", 155)
             .attr("y", 35);
         purPowerLegend.append("text")
             .attr("class","legend-text")
             .text("2011-2012")
-            .attr("x", 120)
+            .attr("x", 100)
             .attr("y", 48);
 
 
@@ -691,12 +690,12 @@ d3.json("data/jsons/countriesAndContinents.json", function( countriesAndContinen
             .attr("height",15)
             .attr("width",15)
             .attr("fill","#ffcc00")
-            .attr("x", 100)
+            .attr("x", 155)
             .attr("y", 65);
         purPowerLegend.append("text")
             .attr("class","legend-text")
             .text("2010-2011")
-            .attr("x", 120)
+            .attr("x", 100)
             .attr("y", 78);
 
 
