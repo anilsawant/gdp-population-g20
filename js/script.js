@@ -113,7 +113,7 @@ var svg1 = d3.select("#graphWrap1").append("svg")
 
 svg1.call(populationTip);
 
-d3.json("../data/jsons/countriesAndContinents.json", function( countriesAndContinents ) {
+d3.json("data/jsons/countriesAndContinents.json", function( countriesAndContinents ) {
 
   var noOfCountries = countriesAndContinents.length;
   // Function to check whether an entry is a country
@@ -127,7 +127,7 @@ d3.json("../data/jsons/countriesAndContinents.json", function( countriesAndConti
 
 
   // To read the graph 1 JSON
-  d3.json("../data/jsons/graph11.json",function( data ) {
+  d3.json("data/jsons/graph11.json",function( data ) {
 
     // Filtering the parsed data to get the plotting data
     var plottingData = data.filter(function( countryDetails ) {
@@ -208,7 +208,7 @@ var svg2 = d3.select("#graphWrap2").append("svg")
 
 svg2.call( gdpTip );
 
-d3.json("../data/jsons/countriesAndContinents.json", function( countriesAndContinents ) {
+d3.json("data/jsons/countriesAndContinents.json", function( countriesAndContinents ) {
 
   var noOfCountries = countriesAndContinents.length;
   // Function to check whether an entry is a country
@@ -222,7 +222,7 @@ d3.json("../data/jsons/countriesAndContinents.json", function( countriesAndConti
 
 
   // To read the graph 1 JSON
-  d3.json("../data/jsons/graph12.json",function( data ) {
+  d3.json("data/jsons/graph12.json",function( data ) {
 
     // Filtering the parsed data to get the plotting data
     var plottingData = data.filter(function( countryDetails ) {
@@ -304,7 +304,7 @@ var svg3 = d3.select("#graphWrap3").append("svg")
 
 svg3.call( purchasingPowerTip );
 
-d3.json("../data/jsons/countriesAndContinents.json", function( countriesAndContinents ) {
+d3.json("data/jsons/countriesAndContinents.json", function( countriesAndContinents ) {
 
   var noOfCountries = countriesAndContinents.length;
   // Function to check whether an entry is a country
@@ -318,7 +318,7 @@ d3.json("../data/jsons/countriesAndContinents.json", function( countriesAndConti
 
 
   // To read the graph 1 JSON
-  d3.json("../data/jsons/graph13.json",function( data ) {
+  d3.json("data/jsons/graph13.json",function( data ) {
 
     // Filtering the parsed data to get the plotting data
     var plottingData = data.filter(function( countryDetails ) {
@@ -405,7 +405,7 @@ svg4.call( growthPop2012Tip );
 svg4.call( growthPop2013Tip );
 
 
-d3.json("../data/jsons/countriesAndContinents.json", function( countriesAndContinents ) {
+d3.json("data/jsons/countriesAndContinents.json", function( countriesAndContinents ) {
 
   var noOfCountries = countriesAndContinents.length;
   // Function to check whether an entry is a country
@@ -419,7 +419,7 @@ d3.json("../data/jsons/countriesAndContinents.json", function( countriesAndConti
 
 
   // To read the graph 1 JSON
-  d3.json("../data/jsons/pop_pp_growth_graph.json",function( data ) {
+  d3.json("data/jsons/pop_pp_growth_graph.json",function( data ) {
 
     // Filtering the parsed data to get the plotting data
     var initialPlottingData = data.filter(function( countryDetails ) {
@@ -593,8 +593,8 @@ d3.json("../data/jsons/countriesAndContinents.json", function( countriesAndConti
             .attr("width", 16)
             .attr("y", function(d) { return yPP(parseFloat(d.ppGrowth2011) + parseFloat(d.ppGrowth2012) ); })
             .attr("height", function(d) { return height - yPP(parseFloat(d.ppGrowth2012)); })
-            .on('mouseover', growthPp2011Tip.show)
-            .on('mouseout', growthPp2011Tip.hide);
+            .on('mouseover', growthPp2012Tip.show)
+            .on('mouseout', growthPp2012Tip.hide);
 
         svg4.selectAll(".pPBar2013")
               .data( plottingData )
@@ -604,79 +604,100 @@ d3.json("../data/jsons/countriesAndContinents.json", function( countriesAndConti
             .attr("width", 16)
             .attr("y", function(d) { return yPP(parseFloat(d.ppGrowth2011) + parseFloat(d.ppGrowth2012) + parseFloat(d.ppGrowth2013)); })
             .attr("height", function(d) { return height - yPP(parseFloat(d.ppGrowth2013)); })
-            .on('mouseover', growthPp2011Tip.show)
-            .on('mouseout', growthPp2011Tip.hide);
+            .on('mouseover', growthPp2013Tip.show)
+            .on('mouseout', growthPp2013Tip.hide);
 
-        svg4.append("rect")
+    var populationLegend =  svg4.append("g");
+        populationLegend.append("text")
+            .attr("class","legend-text")
+            .text("Population Growth")
+            .attr("x", 10)
+            .attr("y", 0);
+
+        populationLegend.append("rect")
             .attr("height",15)
             .attr("width",15)
             .attr("fill","#80ccff")
-            .attr("x", 10);
-        svg4.append("text")
+            .attr("x", 10)
+            .attr("y", 5);
+        populationLegend.append("text")
             .attr("class","legend-text")
             .text("2012-2013")
             .attr("x", 30)
-            .attr("y", 13);
+            .attr("y", 18);
 
-
-        svg4.append("rect")
-            .attr("height",15)
-            .attr("width",15)
-            .attr("fill","#ffe680")
-            .attr("x", 100);
-        svg4.append("text")
-            .attr("class","legend-text")
-            .text("2012-2013")
-            .attr("x", 120)
-            .attr("y", 13);
-
-        svg4.append("rect")
+        populationLegend.append("rect")
             .attr("height",15)
             .attr("width",15)
             .attr("fill","#4db8ff")
             .attr("x", 10)
-            .attr("y", 30);
-        svg4.append("text")
+            .attr("y", 35);
+        populationLegend.append("text")
             .attr("class","legend-text")
             .text("2011-2012")
             .attr("x", 30)
-            .attr("y", 43);
+            .attr("y", 48);
 
-        svg4.append("rect")
-            .attr("height",15)
-            .attr("width",15)
-            .attr("fill","#ffdb4d")
-            .attr("x", 100)
-            .attr("y", 30);
-        svg4.append("text")
-            .attr("class","legend-text")
-            .text("2011-2012")
-            .attr("x", 120)
-            .attr("y", 43);
-
-        svg4.append("rect")
+        populationLegend.append("rect")
             .attr("height",15)
             .attr("width",15)
             .attr("fill","#0099ff")
             .attr("x", 10)
-            .attr("y", 60);
-        svg4.append("text")
+            .attr("y", 65);
+        populationLegend.append("text")
             .attr("class","legend-text")
             .text("2010-2011")
             .attr("x", 30)
-            .attr("y", 73);
+            .attr("y", 78);
 
-        svg4.append("rect")
+
+
+
+        var purPowerLegend = svg4.append("g")
+                                .attr("transform", "translate(680,0)");
+
+        purPowerLegend.append("text")
+            .attr("class","legend-text")
+            .text("Purchasing Power Growth")
+            .attr("x", 50)
+            .attr("y", 0);
+
+        purPowerLegend.append("rect")
+            .attr("height",15)
+            .attr("width",15)
+            .attr("fill","#ffe680")
+            .attr("x", 100)
+            .attr("y", 5);
+        purPowerLegend.append("text")
+            .attr("class","legend-text")
+            .text("2012-2013")
+            .attr("x", 120)
+            .attr("y", 18);
+
+        purPowerLegend.append("rect")
+            .attr("height",15)
+            .attr("width",15)
+            .attr("fill","#ffdb4d")
+            .attr("x", 100)
+            .attr("y", 35);
+        purPowerLegend.append("text")
+            .attr("class","legend-text")
+            .text("2011-2012")
+            .attr("x", 120)
+            .attr("y", 48);
+
+
+        purPowerLegend.append("rect")
             .attr("height",15)
             .attr("width",15)
             .attr("fill","#ffcc00")
             .attr("x", 100)
-            .attr("y", 60);
-        svg4.append("text")
+            .attr("y", 65);
+        purPowerLegend.append("text")
             .attr("class","legend-text")
             .text("2010-2011")
             .attr("x", 120)
-            .attr("y", 73);
+            .attr("y", 78);
 
 
   });
@@ -700,7 +721,7 @@ var svg5 = d3.select("#graphWrap5").append("svg")
 svg5.call( continentsPopTip );
 svg5.call( continentGDPTip );
 
-d3.json("../data/jsons/countriesAndContinents.json", function( countriesAndContinents ) {
+d3.json("data/jsons/countriesAndContinents.json", function( countriesAndContinents ) {
 
   var noOfCountries = countriesAndContinents.length;
   // To get continents array
@@ -737,7 +758,7 @@ d3.json("../data/jsons/countriesAndContinents.json", function( countriesAndConti
   }
 
   // To read the graph 1 JSON
-  d3.json("../data/jsons/continent_wise_graph.json",function( data ) {
+  d3.json("data/jsons/continent_wise_graph.json",function( data ) {
 
     // Filtering the parsed data to get the plotting data
     var initialPlottingData = data.filter( function( countryDetails ) {
@@ -865,7 +886,7 @@ var svg6 = d3.select("#graphWrap6").append("svg")
 svg6.call( continentsPopTip );
 svg6.call( continentGDPTip );
 
-d3.json("../data/jsons/countriesAndContinents.json", function( countriesAndContinents ) {
+d3.json("data/jsons/countriesAndContinents.json", function( countriesAndContinents ) {
 
   var noOfCountries = countriesAndContinents.length;
   // To get continents array
@@ -902,7 +923,7 @@ d3.json("../data/jsons/countriesAndContinents.json", function( countriesAndConti
   }
 
   // To read the graph 1 JSON
-  d3.json("../data/jsons/continent_wise_graph.json",function( data ) {
+  d3.json("data/jsons/continent_wise_graph.json",function( data ) {
 
     // Filtering the parsed data to get the plotting data
     var initialPlottingData = data.filter( function( countryDetails ) {
