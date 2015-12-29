@@ -127,7 +127,7 @@ d3.json("data/jsons/countriesAndContinents.json", function( countriesAndContinen
 
 
   // To read the graph 1 JSON
-  d3.json("data/jsons/graph11.json",function( data ) {
+  d3.json("data/jsons/graph123.json",function( data ) {
 
     // Filtering the parsed data to get the plotting data
     var plottingData = data.filter(function( countryDetails ) {
@@ -222,7 +222,7 @@ d3.json("data/jsons/countriesAndContinents.json", function( countriesAndContinen
 
 
   // To read the graph 1 JSON
-  d3.json("data/jsons/graph12.json",function( data ) {
+  d3.json("data/jsons/graph123.json",function( data ) {
 
     // Filtering the parsed data to get the plotting data
     var plottingData = data.filter(function( countryDetails ) {
@@ -318,7 +318,7 @@ d3.json("data/jsons/countriesAndContinents.json", function( countriesAndContinen
 
 
   // To read the graph 1 JSON
-  d3.json("data/jsons/graph13.json",function( data ) {
+  d3.json("data/jsons/graph123.json",function( data ) {
 
     // Filtering the parsed data to get the plotting data
     var plottingData = data.filter(function( countryDetails ) {
