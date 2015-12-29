@@ -12,58 +12,6 @@ createCountriesAndContinentJSON();
 // function call to create the JSON String representation of the data
 createJSONFromFile( '../data/raw_data_3.csv' );  // accepts the raw content's file path
 
-
-//Function to create JSON for Graph 1
-function createJSONForGraph11( processedData ) {
-  var graphDataArray = [];
-  var noOfRows = processedData.length;
-
-  for (var i = 0; i < noOfRows; i++) {
-    graphDataArray[i] = {
-      countryName : processedData[i][0],
-      population2013 : processedData[i][5]
-    };
-  }
-
-  var fileName = "graph11";
-  writeJSONToDisk( fileName, JSON.stringify( graphDataArray ) );// Write to disk
-
-} // End createJSONForGraph11()
-
-// Function to create JSON for Graph 2
-function createJSONForGraph12( processedData ) {
-  var graphDataArray = [];
-  var noOfRows = processedData.length;
-
-  for (var i = 0; i < noOfRows; i++) {
-    graphDataArray[i] = {
-      countryName : processedData[i][0],
-      gdp2013 : processedData[i][9]
-    };
-  }
-
-  var fileName = "graph12";
-  writeJSONToDisk( fileName, JSON.stringify( graphDataArray ) );// Write to disk
-
-} // End createJSONForGraph12()
-
-// Function to create JSON for Graph 2
-function createJSONForGraph13( processedData ) {
-  var graphDataArray = [];
-  var noOfRows = processedData.length;
-
-  for (var i = 0; i < noOfRows; i++) {
-    graphDataArray[i] = {
-      countryName : processedData[i][0],
-      pp2013 : processedData[i][17]
-    };
-  }
-
-  var fileName = "graph13";
-  writeJSONToDisk( fileName, JSON.stringify( graphDataArray ) );// Write to disk
-
-} // End createJSONForGraph13()
-
 // Function to create JSON for Graph 1,2,3
 function createJSONForGraph123( processedData ) {
   var graphDataArray = [];
@@ -131,8 +79,6 @@ function createJSONForGraph3( processedData ) {
 
 } // End createJSONForGraph3()
 
-
-
 // function to create a JSON String
 function createJSONFromFile( file ) {
   var fileName = file.substr( file.lastIndexOf("/") + 1, file.length );
@@ -160,43 +106,10 @@ function createJSONFromFile( file ) {
     }
   }
 
-  var headers = [];
-  for (var i = 0; i < noOfCols; i++) {
-    headers[i] = processedData[0][i];
-  }
-
   // Create the graph specific JSONs
-  createJSONForGraph11( processedData );
-  createJSONForGraph12( processedData );
-  createJSONForGraph13( processedData );
   createJSONForGraph123( processedData );
   createJSONForGraph2( processedData );
   createJSONForGraph3( processedData );
-
-  var countryDetailsJSON = [];
-
-  // To treat headers as Keys
-  for( var i = 1; i < noOfRows; i++) {
-    var country = {};
-    for (var j = 0; j < noOfCols; j++) {
-      country[ headers[j] ] = processedData[i][j];
-    }
-    countryDetailsJSON.push( country );
-  }
-
-  // To add name and value properties
-  /*for( var i = 1; i < noOfRows; i++) {
-    var country = [];
-    for (var j = 0; j < noOfCols; j++) {
-      country[j] = {
-        name : headers[j],
-        value : processedData[i][j]
-      }
-    }
-    countryDetailsJSON.push( country );
-  }*/
-
-  writeJSONToDisk( fileName, JSON.stringify( countryDetailsJSON ) );// Write to disk
 
 } // End createJSONFromFile
 
@@ -204,17 +117,15 @@ function createJSONFromFile( file ) {
 // Function to create 'data/jsons' directory
 function createJSONDirectory() {
   // Check if 'jsons' directory exists
-  var dirStats = fs.statSync('../data/jsons');
-  if ( dirStats.isDirectory() ) {
+  try {
+    fs.mkdirSync('../data/jsons');
     return true;
-  } else {
-    // Creating the directory to store JSON files
-    fs.mkdir('../data/jsons', function( err ) {
-      if( err ) {
-        return console.error( err );;
-      }
+  } catch(e) {
+    if ( e.code != 'EEXIST' ) {
+      throw e;
+    } else {
       return true;
-    });
+    }
   }
 } // End createJSONDirectory()
 
